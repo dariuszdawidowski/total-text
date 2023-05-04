@@ -18,13 +18,18 @@ class TotalText {
         // Callback
         this.onChange = onChange;
 
-        // Textarea
+        // Main element
         this.element = document.createElement('div');
-        this.element.classList.add('editor');
+        this.element.classList.add('total-text');
+
+        // Textarea
+        this.editor = document.createElement('div');
+        this.editor.classList.add('editor');
         if (value) this.set(value);
-        this.element.setAttribute('contenteditable', true);
-        this.element.setAttribute('spellcheck', spellcheck ? 'true' : 'false');
-        this.element.setAttribute('autocomplete', 'off');
+        this.editor.setAttribute('contenteditable', true);
+        this.editor.setAttribute('spellcheck', spellcheck ? 'true' : 'false');
+        this.editor.setAttribute('autocomplete', 'off');
+        this.element.append(this.editor);
 
         // Add to container
         if (container) container.append(this.element);
@@ -35,11 +40,11 @@ class TotalText {
      */
 
     set(text) {
-        this.element.innerHTML = text;
+        this.editor.innerHTML = text;
     }
 
     get() {
-        return this.element.innerHTML;
+        return this.editor.innerHTML;
     }
 
     /**
@@ -47,7 +52,7 @@ class TotalText {
      */
 
     clear() {
-        this.element.innerHTML = '';
+        this.editor.innerHTML = '';
     }
 
     /**
@@ -57,13 +62,13 @@ class TotalText {
     edit(enable) {
         // Start editing
         if (enable) {
-            this.element.classList.add('editing');
-            this.element.setAttribute('contenteditable', true);
+            this.editor.classList.add('editing');
+            this.editor.setAttribute('contenteditable', true);
         }
         // Finish editing
         else {
-            this.element.setAttribute('contenteditable', false);
-            this.element.classList.remove('editing');
+            this.editor.setAttribute('contenteditable', false);
+            this.editor.classList.remove('editing');
             if (this.onChange) this.onChange(this.get());
         }
     }
@@ -73,7 +78,7 @@ class TotalText {
      */
 
     spellcheck(enable) {
-        this.element.setAttribute('spellcheck', enable ? 'true' : 'false');
+        this.editor.setAttribute('spellcheck', enable ? 'true' : 'false');
     }
 
 }

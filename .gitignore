@@ -1,5 +1,6 @@
 .DS_Store
 Thumbs.db
 node_modules
+dist
 package-lock.json
 total-text.js

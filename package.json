@@ -1,6 +1,7 @@
 {
 	"name": "total-text",
 	"version": "0.1.2",
+	"unpkg": "dist/total-text.js",
 	"description": "Rich-Text editor library for JavaScript/ES8 + HTML5.",
 	"license": "MIT",
 	"scripts": {

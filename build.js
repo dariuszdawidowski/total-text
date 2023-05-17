@@ -1,14 +1,28 @@
 /**
- * Build script v4/js
+ * Build script v5
  */
 
-const src_ejs = 'total-text.js.ejs';
-const dst_js = 'total-text.js';
+const files = [
+    { src: 'total-text.js.ejs', dst: 'total-text.js' },
+];
 
 const fs = require('fs');
-const ejs = require('ejs');
 const { readFile } = require('fs').promises;
+const ejs = require('ejs');
+const cleancss = require('clean-css');
 const { minify } = require('terser');
+
+const mincss = (filePath) => {
+    try {
+        const cssContent = fs.readFileSync(filePath, 'utf8');
+        const minifiedCss = new cleancss().minify(cssContent).styles;
+        return minifiedCss;
+    }
+    catch (error) {
+        console.error(`Error minifying css ${filePath}:`, error);
+        return null;
+    }
+};
 
 const minjs = async (filePath) => {
     try {
@@ -23,5 +37,11 @@ const minjs = async (filePath) => {
 };
 
 fs.mkdirSync('dist');
-ejs.render(fs.readFileSync(src_ejs, 'utf8'), { minjs }, {async: true})
-.then(output => fs.writeFileSync('dist/' + dst_js, output, 'utf8'));
+
+files.forEach((file) => {
+
+    ejs.render(fs.readFileSync(file.src, 'utf8'), { minjs, mincss }, {async: true})
+        .then(output => fs.writeFileSync('dist/' + file.dst, output, 'utf8'));
+
+});
+

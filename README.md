@@ -8,7 +8,7 @@ Total Text
 Rich-Text editor library for JavaScript/ES8 + HTML5.
 <p>
 <p align="center">
-v 0.1.1
+v 0.1.2
 <p>
 
 For more details look into demo.html.

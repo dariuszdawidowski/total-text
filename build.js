@@ -1,5 +1,5 @@
 /**
- * Build script v5
+ * Build script v6
  */
 
 const files = [
@@ -36,7 +36,7 @@ const minjs = async (filePath) => {
     }
 };
 
-fs.mkdirSync('dist');
+if (!fs.existsSync('dist')) fs.mkdirSync('dist');
 
 files.forEach((file) => {
 

@@ -81,4 +81,41 @@ class TotalText {
         this.editor.setAttribute('spellcheck', enable ? 'true' : 'false');
     }
 
+    /**
+     * Caret position
+     */
+
+    getCaretPosition(element = this.editor) {
+        const caretInfo = {
+            position: 0,
+            element: null
+        };
+
+        const doc = element.ownerDocument || element.document;
+        const win = doc.defaultView || doc.parentWindow;
+        var sel;
+
+        if (typeof win.getSelection != 'undefined') {
+            sel = win.getSelection();
+            if (sel.rangeCount > 0) {
+                const range = win.getSelection().getRangeAt(0);
+                const preCaretRange = range.cloneRange();
+                preCaretRange.selectNodeContents(element);
+                preCaretRange.setEnd(range.endContainer, range.endOffset);
+                caretInfo.position = preCaretRange.toString().length;
+                caretInfo.element = range.endContainer.parentElement;
+            }
+        }
+        else if ((sel = doc.selection) && sel.type != 'Control') {
+            const textRange = sel.createRange();
+            const preCaretTextRange = doc.body.createTextRange();
+            preCaretTextRange.moveToElementText(element);
+            preCaretTextRange.setEndPoint('EndToEnd', textRange);
+            caretInfo.position = preCaretTextRange.text.length;
+            caretInfo.element = textRange.parentElement();
+        }
+
+        return caretInfo;
+    }
+
 }

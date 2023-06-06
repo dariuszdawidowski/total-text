@@ -8,7 +8,7 @@ Total Text
 Rich-Text editor library for JavaScript/ES8 + HTML5.
 <p>
 <p align="center">
-v0.2.0
+v0.3.0
 <p>
 
 [![build](https://github.com/dariuszdawidowski/total-diagram/actions/workflows/build.yml/badge.svg)](https://github.com/dariuszdawidowski/total-diagram/actions/workflows/build.yml)

@@ -1,6 +1,6 @@
 {
 	"name": "total-text",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Rich-Text editor library for JavaScript/ES8 + HTML5.",
 	"license": "MIT",
 	"scripts": {

@@ -118,6 +118,22 @@ class TotalText {
         return caretInfo;
     }
 
+    /**
+     * Set selected text
+     */
+
+    setSelection(from = 'begin', to = 'end') {
+        const range = document.createRange();
+        range.selectNodeContents(this.element);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+
+    /**
+     * Get selected text
+     */
+
     getSelection() {
         const selection = window.getSelection();
         let selectedText = '';

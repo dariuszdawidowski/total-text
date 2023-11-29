@@ -132,9 +132,10 @@ class TotalText {
 
     /**
      * Get selected text
+     * type: 'text' | 'html' returns in plain text or with html tags
      */
 
-    getSelection() {
+    getSelection(type = 'text') {
         const selection = window.getSelection();
         let selectedText = '';
 
@@ -142,7 +143,10 @@ class TotalText {
             const range = selection.getRangeAt(0);
             const container = document.createElement('div');
             container.appendChild(range.cloneContents());
-            selectedText = container.textContent || container.innerText;
+            if (type == 'text')
+                selectedText = container.textContent || container.innerText;
+            else if (type == 'html')
+                selectedText = container.innerHTML;
         }
 
         return selectedText;
